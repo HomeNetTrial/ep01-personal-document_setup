@@ -1,0 +1,30 @@
+若要增加缓存服务器redis，进行优化访问，需要在 ./mydata/app_data/conif/config.php中
+增加以下代码：
+
+
+'memcache.distributed' => '\\OC\\Memcache\\Redis',
+  'filelocking.enabled' => 'true',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'redis' =>
+  array (
+    'host' => 'redis-server',
+    'timeout' => 0,
+    'dbindex' => 0,
+    'port' => 6379,
+    'password' => '123456',
+  ),
+
+
+2.若是中文名称的pdf文件，可能打开会报错 解决Nextcloud打开pdf文件提示“pdf.js v2.5.207 (build 0974d6052) message missing pdf”的问题
+
+
+
+需要在  进入Nextcloud Web目录下的apps/files_pdfviewer/js/，编辑files_pdfviewer-main.js文件，搜索并找到如下代码：
+
+!==i[a]&&(c+="/"+encodeURIComponent(i[a]));return t&&(c=i[0]+"//"+i[2]+c),c}}
+将其替换为：
+
+!==i[a]&&(c+="/"+i[a]);return t&&(c=i[0]+"//"+i[2]+c),c}}
+
+
+其实就是去掉 encodeURIComponent
