@@ -58,3 +58,12 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./mydata/app_data:/var/www/html
+
+  nextcloud_cron:
+    image: nextcloud:fpm
+    restart: always
+    volumes:
+      - ./mydata/app_data:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - db
