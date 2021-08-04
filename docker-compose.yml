@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 services:
   nextcloud:
     container_name: nextcloud-server
@@ -9,6 +9,8 @@ services:
       - '9000'
     volumes:
       - ./mydata/app_data:/var/www/html
+    depends_on:
+      - db
   onlyoffice-document-server:
     container_name: onlyoffice-document-server
     image: onlyoffice/documentserver:latest
@@ -19,13 +21,13 @@ services:
     volumes:
       - ./mydata/document_data:/var/www/onlyoffice/Data
       - ./mydata/document_log:/var/log/onlyoffice
-  ### mysql
-  mysql:
-    image: mysql
-    restart: unless-stopped
+  
+  db:
+    image: mysql:latest
+    restart: always
     #因为是内部使用mysql数据库，所以可以不导出外部端口，当然，如果你想远程连接的话，可以打开
-    # ports:
-    #     - "23306:3306"
+    #ports:
+    #  - "23306:3306"
     # docker安全验证,忽略
     security_opt:
       - seccomp:unconfined
@@ -35,7 +37,7 @@ services:
         MYSQL_USER: "you"
         MYSQL_PASSWORD: "me"
     volumes:
-        - ./mydata/mysqlData:/var/lib/mysql
+      - ./mydata/mysqlData:/var/lib/mysql
 
   redis:
     container_name: redis-server
@@ -46,6 +48,7 @@ services:
       - 16379:6379
     volumes:
       - ./mydata/redis_data:/data
+
   nginx:
     container_name: nginx-server
     image: nginx
