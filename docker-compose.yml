@@ -11,6 +11,19 @@ services:
       - ./mydata/app_data:/var/www/html
     depends_on:
       - db
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_HOST_PORT=6379
+      - REDIS_HOST_PASSWORD=123456
+      - MYSQL_PASSWORD=myCloud
+      - MYSQL_DATABASE=myCloud
+      - MYSQL_USER=myCloud
+      - MYSQL_HOST=db
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=12345
+
+
   onlyoffice-document-server:
     container_name: onlyoffice-document-server
     image: onlyoffice/documentserver:latest
@@ -25,6 +38,7 @@ services:
   db:
     image: mysql:latest
     restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     #因为是内部使用mysql数据库，所以可以不导出外部端口，当然，如果你想远程连接的话，可以打开
     #ports:
     #  - "23306:3306"
@@ -32,10 +46,10 @@ services:
     security_opt:
       - seccomp:unconfined
     environment:
-        MYSQL_ROOT_PASSWORD: "123456"
+        MYSQL_ROOT_PASSWORD: "myCloud"
         MYSQL_DATABASE: "myCloud"
-        MYSQL_USER: "you"
-        MYSQL_PASSWORD: "me"
+        MYSQL_USER: "myCloud"
+        MYSQL_PASSWORD: "myCloud"
     volumes:
       - ./mydata/mysqlData:/var/lib/mysql
 
@@ -44,8 +58,8 @@ services:
     image: redis
     restart: always
     command: redis-server --requirepass 123456
-    ports:
-      - 16379:6379
+    # ports:
+    #   - 16379:6379
     volumes:
       - ./mydata/redis_data:/data
 

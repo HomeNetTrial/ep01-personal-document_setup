@@ -9,8 +9,8 @@ if [ ! -d ${INSTALL_DIR} ];then
 fi
 echo "开始解压玩儿熊准备的插件包apps.tar.gz进行安装啦..."
 sleep 2
-tar vxzf apps.tar.gz&&cp -rf ./apps/* ${INSTALL_DIR} && chown -R www-data ${INSTALL_DIR}
-rm -rf apps
+tar vxzf custom_apps.tar.gz&&cp -rf ./custom_apps/* ${INSTALL_DIR} && chown -R www-data ${INSTALL_DIR}
+rm -rf custom_apps
 echo "所有APP已经安装完毕，现在设置onlyoffice的访问..."
 echo "正在设置信用的访问内部网络的IP地址..."
 docker exec -u www-data nextcloud-server php occ --no-warnings config:system:get trusted_domains >> trusted_domain.tmp
