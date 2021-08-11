@@ -1,4 +1,15 @@
 
+## 脚本使用说明
+要是你使用我的脚本录制教程的，请注明出处哦！
+脚本编写维护不易，多理解！
+
+---
+B站：https://space.bilibili.com/472406837
+
+油管：https://www.youtube.com/channel/UC18rGggQjOEGOyR9tMv8rKg
+
+---
+
 * [x] 如果你是一个经常需要与文档打交道的文职从业者
 * [x] 如果你是一个内容创作者，有一堆辛辛苦苦的作品不知怎么安置和管理
 * [x] 如果你是那个写文档经常忘记按ctrl + s保存的人
@@ -123,6 +134,7 @@ https://nextcloud.com/
 
 ## 三、部署和使用的疑问
 如果你在安装之间，或者使用之后，有什么疑问想法的，加群讨论哦，群二维码过期的，请到我公众号添加我私信进群哦！！⛽️
+
 ![](https://cdn.jsdelivr.net/gh/playbear668/mypics//img/WechatIMG35.jpeg)
 
 
